@@ -31,6 +31,14 @@ int incLisAlunoOrd(tAluno aluno, tAluno lista[], int n);
 void printLisAluno(tAluno lista[], int n);
 void printItemLisAluno(tAluno lista[], int n);
 
+void iniListAlunos(tListAlunos* list, int cap);
+int buscaNaoOrdenada(tListAlunos list, char chave[]);
+int buscaOrdenada(tListAlunos list, char chave[], int* achou);
+int incNaoOrdenada(tAluno aluno, tListAlunos list);
+int incOrdenada(tAluno aluno, tListAlunos list);
+int remNaoOrdenada(tAluno aluno, tListAlunos list);
+int remOrdenada(tAluno aluno, tListAlunos list);
+
 typedef struct{
 	int lsize;			// capacidade da lista (tamanho do array)
 	int next; 			// tamanho da lista (índice do priemiro elemento disponível)

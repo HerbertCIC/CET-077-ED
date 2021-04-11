@@ -295,15 +295,13 @@ void printItemLisAluno(tAluno lista[], int n)
 	printf("%s, ", lista[n].nome);
 	printf("%s;\n ", lista[n].email);
 	printf(" ]\n");
-} 
-  
+}   
 
 void iniListAlunos(tListAlunos* list, int cap)
 {
 	list->cap = cap;
 	list->tam = 0;
 	list->lista = (tAluno*) malloc((cap+1)*sizeof(tAluno));
-
 }
 // ---------------------------------MINHAS MODIFICAÇÕES------------------------------
 
