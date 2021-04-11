@@ -8,10 +8,10 @@ int main(void)
 	tListAlunos* lista;
   lista = malloc(1*sizeof(tListAlunos));
   iniListAlunos(lista, 10);
-  // Colocar aqui a leitura de um arquivo
+  // leitura de um arquivo
   FILE *fp;
-  char nome[20] = "dadosAlunos.txt";
-  if((fp=fopen(nome,"r"))==NULL){
+  char path[20] = "dadosAlunos.txt";
+  if((fp=fopen(path,"r"))==NULL){
     printf("Erro");
     exit(-1);
   }
@@ -22,48 +22,76 @@ int main(void)
     fscanf(fp,"%s\n", lista->lista[i].email);
   }
   lista->tam = i;
-  printf("Lista do arquivo\n");
+  printf("Arquivo:\n");
   printLisAluno(lista->lista, lista->tam);
   printf("tamanho = %d\n", lista->tam);
   
   printf("Testando Listas Lineares Sequenciais Não Ordenadas\n");
-  printf("--------------------------------------------------\n");
+  printf("----------------------------------------\n");
   
   //add um aluno ao arquivo
   tAluno aluno;
-  printf("\nIncluindo um aluno no arquivo\n");
-  printf("--------------------------------------------------\n");
-  printf("Digite o numero de matricula: ");
-  scanf("%s",aluno.numMatricula);
-  getchar();
-  printf("Digite o nome do aluno: "); 
-  fgets(aluno.nome, 100, stdin);
-  fflush(stdin);
-  printf("Digite o email do aluno: ");
-  scanf("%s",aluno.email);
-  if(incNaoOrdenada(aluno, lista)){
-     atualizar_arq(fp, lista, nome);
-     printf("------------Adicionado com sucesso!!------------\n");
-     printf("\nArquivo atualizado:\n");
-     printLisAluno(lista->lista, lista->tam);
-  }else
-    printf("\nNao foi possivel adicionar ao arquivo!\n");
+  char op=0;
+  do{
  
-  printf("tamanho = %d\n", lista->tam);
+    printf("\nIncluindo um aluno no arquivo\n");
+    printf("----------------------------------------\n");
+    printf("Digite o numero de matricula: ");
+    scanf("%s",aluno.numMatricula);
+    getchar();
+    printf("Digite o nome do aluno: "); 
+    fgets(aluno.nome, 100, stdin);
+    fflush(stdin);
+    printf("Digite o email do aluno: ");
+    scanf("%s",aluno.email);
+    fflush(stdin);
+    if(incNaoOrdenada(aluno, lista)){
+      atualizar_arq(fp, lista, path);
+      printf("Adicionado com sucesso!!\n");
+      printf("\nArquivo atualizado:\n");
+      printLisAluno(lista->lista, lista->tam);
+    }else
+      printf("\nNão foi possivel adicionar ao arquivo!\n");
+  
+    printf("tamanho = %d\n", lista->tam);
+    printf("Deseja fazer outra inclusão (s/n)? ");
+    scanf(" %c", &op);
+  }while(op=='s' || op=='S');
 
   //remove um aluno do arquivo
-   printf("\nRemovendo um aluno do arquivo\n");
-  printf("--------------------------------------------------\n");
-  printf("Digite o numero da matricula do aluno que deseja remover: ");
-  scanf("%s", aluno.numMatricula);
-  if(remNaoOrdenada(aluno,lista)){
-     atualizar_arq(fp,lista,nome);
-     printf("------------Removido com sucesso!!------------\n");
-     printf("\nArquivo atualizado:\n");
-     printLisAluno(lista->lista, lista->tam);
-  }else
-    printf("\nNao foi possivel fazer a remoção\n");
+  do{
+    printf("\nRemovendo um aluno do arquivo\n");
+    printf("----------------------------------------\n");
+    printf("Digite o numero da matricula do aluno que deseja remover: ");
+    scanf("%s", aluno.numMatricula);
+    if(remNaoOrdenada(aluno,lista)){
+      atualizar_arq(fp,lista,path);
+      printf("Removido com sucesso!!\n");
+      printf("\nArquivo atualizado:\n");
+      printLisAluno(lista->lista, lista->tam);
+    }else
+      printf("\nNão foi possivel fazer a remoção\n");
 
+    printf("Deseja fazer outra inclusão (s/n)? ");
+    scanf(" %c", &op);
+  }while(op=='s' || op=='S');
+
+  //Procurando um elemento que está na lista
+	printf("Testando o método de busca não ordenada\n"); 
+  do{
+    printf("Digite o numero da matricula para pesquisar: ");
+    scanf("%s", aluno.numMatricula);
+    int index = buscaNaoOrdenada(lista, aluno.numMatricula);
+    if(index < lista->tam){
+      printf("Elemento achado com índice %d\n", index);
+      printLisAluno(lista->lista, lista->tam);
+    }else{
+      printf("Elemento não se encontra na lista!!\n");
+    }
+    printf("Deseja fazer outra inclusão (s/n)? ");
+    scanf(" %c", &op);
+  }while(op=='s' || op=='S');
+  
   free(lista);
 	return 0;
 }
