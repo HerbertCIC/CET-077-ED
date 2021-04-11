@@ -234,7 +234,7 @@ int buscaLisAlunoBinRec(tAluno lista[], int n, char chave[], int* achou)
 
 void incLisAluno(tAluno aluno, tAluno lista[], int n)
 {
-	if(buscaLisAluno2(lista, n, aluno.numMatricula) == n){
+	if(buscaLisAluno2(lista, n, aluno.numMatricula) == n){//lista[0], 0, aluno.numMatricula
 		strcpy(lista[n].numMatricula, aluno.numMatricula);
 		strcpy(lista[n].nome, aluno.nome);
 		strcpy(lista[n].email,aluno.email);
@@ -303,34 +303,67 @@ void iniListAlunos(tListAlunos* list, int cap)
 	list->cap = cap;
 	list->tam = 0;
 	list->lista = (tAluno*) malloc((cap+1)*sizeof(tAluno));
+
 }
+// ---------------------------------MINHAS MODIFICAÇÕES------------------------------
 
 int buscaNaoOrdenada(tListAlunos list, char chave[]){
-
-	//retorna o indice onde achou 
-
+  int i = 0;
+  int n = list.tam+1;
+	strcpy(list.lista[n].numMatricula, chave); // adicionando chave no final
+  while(strcmp(list.lista[n].numMatricula, chave) != 0){
+    i++;
+  }
+  return i; //retorna o indice onde achou
 }
 
-int incNaoOrdenada(tAluno aluno, tListAlunos list){
-	
+
+int incNaoOrdenada(tAluno aluno, tListAlunos list){	
 	// Retorna TRUE ou FALSE
 	// FALSE: Se o aluno já estiver na lista ou se a 
 	// lista já estiver cheia
-
+    int n = list.tam;
+  	if(buscaNaoOrdenada(list, aluno.numMatricula) == n && n < list.cap){
+      strcpy(list.lista[n].numMatricula, aluno.numMatricula);
+		  strcpy(list.lista[n].nome, aluno.nome);
+		  strcpy(list.lista[n].email, aluno.email);
+      list.tam ++;
+      return TRUE;
+	  }else
+      return FALSE;
 }
 
 int remNaoOrdenada(tAluno aluno, tListAlunos list){
-
 	// Retorna TRUE ou FALSE
 	// FALSE: Se o aluno não estiver na lista ou se a 
 	// lista já estiver vazia
-
+  int n = list.tam+1;
+  if(buscaNaoOrdenada(list, aluno.numMatricula) == n || n == 1){
+    return FALSE;
+  }else{
+    int i = buscaNaoOrdenada(list, aluno.numMatricula);
+		for(int j = i; j < n; j++){
+			strcpy(list.lista[j].numMatricula, list.lista[j+1].numMatricula);
+			strcpy(list.lista[j].nome, list.lista[j+1].nome);
+			strcpy(list.lista[j].email, list.lista[j+1].email);
+    }
+    list.tam--;
+    return TRUE;
+  }
 }
 
 int buscaOrdenada(tListAlunos list, char chave[], int* achou){
-
 	//retorna o indice onde achou 
-
+  int i = 0;
+  int n = list.tam+1;
+	*achou = FALSE;  
+	strcpy(list.lista[n].numMatricula, chave); // adicionando chave no final
+  while(strcmp(list.lista[i].numMatricula, chave) < 0){
+    i++;
+  }
+	if((strcmp(list.lista[i].numMatricula, chave) == 0) && (i < n))
+		*achou = TRUE;
+  return i;
 }
 
 int incOrdenada(tAluno aluno, tListAlunos list){
@@ -338,7 +371,35 @@ int incOrdenada(tAluno aluno, tListAlunos list){
 	// Retorna TRUE ou FALSE
 	// FALSE: Se o aluno já estiver na lista ou se a 
 	// lista já estiver cheia
+  int achou;
+  int n = list.tam+1;
+	int i = buscaOrdenada(list, aluno.numMatricula, &achou);
+	if (i == n && n <= list.cap){
+		strcpy(list.lista[n].numMatricula, aluno.numMatricula);
+		strcpy(list.lista[n].nome, aluno.nome);
+		strcpy(list.lista[n].email,aluno.email);
+		return TRUE;
+	}else if (!achou && n <= list.cap){
+		tAluno troca;
+		for(int j = i; j < n; j++){
+			strcpy(troca.numMatricula, list.lista[j].numMatricula);
+			strcpy(troca.nome, list.lista[j].nome);
+			strcpy(troca.email, list.lista[j].email);
+			
+			strcpy(list.lista[j].numMatricula, aluno.numMatricula);
+			strcpy(list.lista[j].nome, aluno.nome);
+			strcpy(list.lista[j].email, aluno.email);
 
+			strcpy(aluno.numMatricula, troca.numMatricula);
+			strcpy(aluno.nome, troca.nome);
+			strcpy(aluno.email, troca.email);
+		}
+		strcpy(list.lista[n].numMatricula, aluno.numMatricula);
+		strcpy(list.lista[n].nome, aluno.nome);
+		strcpy(list.lista[n].email, aluno.email);
+		return TRUE;
+	}
+	return FALSE; // Já tem um elemento com essa chave na lista ou a lista está cheia;
 }
 
 int remOrdenada(tAluno aluno, tListAlunos list){
@@ -346,6 +407,19 @@ int remOrdenada(tAluno aluno, tListAlunos list){
 	// Retorna TRUE ou FALSE
 	// FALSE: Se o aluno não estiver na lista ou se a 
 	// lista já estiver vazia
-
+  int achou;
+  int n = list.tam+1;
+  int i = buscaOrdenada(list, aluno.numMatricula, &achou);
+  if(!achou || list.tam == 0){
+    return FALSE;
+  }else{
+		for(int j = i; j < n; j++){
+			strcpy(list.lista[j].numMatricula, list.lista[j+1].numMatricula);
+			strcpy(list.lista[j].nome, list.lista[j+1].nome);
+			strcpy(list.lista[j].email, list.lista[j+1].email);
+    }
+    list.tam--;
+    return TRUE;
+  }
 }
 

@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -O2 -lm
 
 all: 	exemplo_00 exemplo_01 exemplo_02 exemplo_03\
-			exemplo_04 exemplo_05 exemplo_06 exemplo_07
+			exemplo_04 exemplo_05 exemplo_06 exemplo_07\
+      exemplo_08 exemplo_09
 
 
 exemplo_00: main_00.c ferramentas.o
@@ -36,6 +37,14 @@ exemplo_06: main_06.c ferramentas.o
 exemplo_07: main_07.c ferramentas.o
 	$(CC) $(CFLAGS) -I ./include -c main_07.c -o ./bin/main_07.o
 	$(CC) $(CFLAGS)  ./bin/ferramentas.o ./bin/main_07.o -o ./bin/exemplo_07
+
+exemplo_08: main_08.c ferramentas.o
+	$(CC) $(CFLAGS) -I ./include -c main_08.c -o ./bin/main_08.o
+	$(CC) $(CFLAGS)  ./bin/ferramentas.o ./bin/main_08.o -o ./bin/exemplo_08
+
+exemplo_09: main_09.c ferramentas.o
+	$(CC) $(CFLAGS) -I ./include -c main_09.c -o ./bin/main_09.o
+	$(CC) $(CFLAGS)  ./bin/ferramentas.o ./bin/main_09.o -o ./bin/exemplo_09
 
 ferramentas.o: ferramentas.c
 	$(CC) $(CFLAGS) -I ./include -c ferramentas.c -o ./bin/ferramentas.o 
