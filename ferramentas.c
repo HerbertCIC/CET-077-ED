@@ -305,32 +305,32 @@ void iniListAlunos(tListAlunos* list, int cap)
 }
 // ---------------------------------MINHAS MODIFICAÇÕES------------------------------
 
-int buscaNaoOrdenada(tListAlunos list, char chave[]){
+int buscaNaoOrdenada(tListAlunos* list, char chave[]){
   int i = 0;
-  int n = list.tam+1;
-	strcpy(list.lista[n].numMatricula, chave); // adicionando chave no final
-  while(strcmp(list.lista[n].numMatricula, chave) != 0){
+  int n = list->tam;
+	strcpy(list->lista[n].numMatricula, chave); // adicionando chave no final
+  while(strcmp(list->lista[i].numMatricula, chave) != 0){
     i++;
   }
   return i; //retorna o indice onde achou
 }
 
 
-int incNaoOrdenada(tAluno aluno, tListAlunos list){	
+int incNaoOrdenada(tAluno aluno, tListAlunos* list){	
 	// Retorna TRUE ou FALSE
 	// FALSE: Se o aluno já estiver na lista ou se a 
 	// lista já estiver cheia
-    int n = list.tam;
-  	if(buscaNaoOrdenada(list, aluno.numMatricula) == n && n < list.cap){
-      strcpy(list.lista[n].numMatricula, aluno.numMatricula);
-		  strcpy(list.lista[n].nome, aluno.nome);
-		  strcpy(list.lista[n].email, aluno.email);
-      list.tam ++;
+    int n = list->tam;
+  	if(buscaNaoOrdenada(list, aluno.numMatricula) == n && n < list->cap){
+      strcpy(list->lista[n].numMatricula, aluno.numMatricula);
+		  strcpy(list->lista[n].nome, aluno.nome);
+		  strcpy(list->lista[n].email, aluno.email);
+      list->tam ++;
       return TRUE;
 	  }else
       return FALSE;
 }
-
+/*
 int remNaoOrdenada(tAluno aluno, tListAlunos list){
 	// Retorna TRUE ou FALSE
 	// FALSE: Se o aluno não estiver na lista ou se a 
@@ -348,7 +348,7 @@ int remNaoOrdenada(tAluno aluno, tListAlunos list){
     list.tam--;
     return TRUE;
   }
-}
+}*/
 
 int buscaOrdenada(tListAlunos list, char chave[], int* achou){
 	//retorna o indice onde achou 
@@ -419,5 +419,19 @@ int remOrdenada(tAluno aluno, tListAlunos list){
     list.tam--;
     return TRUE;
   }
+}
+
+void atualizar_arq(FILE* fp, tListAlunos* lista, char* nome){
+  if((fp=fopen(nome,"w"))==NULL){
+    printf("Erro de abertura de arquivo!");
+    exit(-1);
+  }
+  int i=0;
+  for(; i < lista->tam+1; i++){
+    fprintf(fp,"%s\n", lista->lista[i].numMatricula);
+    fprintf(fp,"%s", lista->lista[i].nome);
+    fprintf(fp,"%s\n", lista->lista[i].email);
+  }
+  fclose(fp);
 }
 

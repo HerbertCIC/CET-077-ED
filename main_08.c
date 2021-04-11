@@ -3,74 +3,65 @@
 
 #include "include/ferramentas.h"
 
-#define CAP 3
-
 int main(void)
-{
-  printf("Testando Listas Lineares Sequenciais\n"); 
+{ 
 	tListAlunos* lista;
   lista = malloc(1*sizeof(tListAlunos));
-  iniListAlunos(lista, CAP);
+  iniListAlunos(lista, 10);
   // Colocar aqui a leitura de um arquivo
   FILE *fp;
-  if((fp=fopen("dadosAlunos.txt","r"))==NULL){
+  char nome[20] = "dadosAlunos.txt";
+  if((fp=fopen(nome,"r"))==NULL){
     printf("Erro");
     exit(-1);
   }
-  for(int i=0; i<CAP; i++){
+  int i=0;
+  for(i=0;!feof(fp); i++){
     fscanf(fp,"%s\n", lista->lista[i].numMatricula);
     fgets(lista->lista[i].nome,99,fp);
     fscanf(fp,"%s\n", lista->lista[i].email);
   }
-  for(int i=0; i<CAP; i++){
-    printf("%s\n",lista->lista[i].numMatricula);
-    printf("%s",lista->lista[i].nome);
-    printf("%s\n",lista->lista[i].email);
-  }
+  lista->tam = i;
+  printf("Lista do arquivo\n");
+  printLisAluno(lista->lista, lista->tam);
+  printf("tamanho = %d\n", lista->tam);
+  
+  printf("Testando Listas Lineares Sequenciais Não Ordenadas\n");
+  printf("--------------------------------------------------\n");
+  //add um aluno ao arquivo
+  tAluno aluno;
+  printf("Incluindo um aluno no arquivo\n");
+  printf("--------------------------------------------------\n");
+  printf("Digite o numero de matricula: ");
+  scanf("%s",aluno.numMatricula);
+  getchar();
+  printf("Digite o nome do aluno: "); 
+  fgets(aluno.nome, 100, stdin);
+  fflush(stdin);
+  printf("Digite o email do aluno: ");
+  scanf("%s",aluno.email);
+  if(incNaoOrdenada(aluno, lista)){
+     atualizar_arq(fp,lista,nome);
+     printf("------------Adicionado com sucesso!!------------\n");
+     printf("\nArquivo atualizado:\n");
+     printLisAluno(lista->lista, lista->tam);
+  }else
+    printf("\nNão foi possivel adicionar ao arquivo!");
+ 
+  printf("tamanho = %d\n", lista->tam);
+ 
+  /*for(int j=0; j<i; j++){
+    printf("%s\n",lista->lista[j].numMatricula);
+    printf("%s",lista->lista[j].nome);
+    printf("%s\n",lista->lista[j].email);
+  }*/
 
-  /*
-	strcpy(aluno.numMatricula, "201913425");
-  strcpy(aluno.nome, "Regrano Guedes Maia");
-  strcpy(aluno.email,"regguemai@uesc.br");
-	incLisAluno(aluno, lista_stc, nLis);
-  nLis++;
 
-	strcpy(aluno.numMatricula, "201913245");
-  strcpy(aluno.nome, "Mengano Martins Pereira");
-  strcpy(aluno.email,"menmarper@uesc.br");
-	incLisAluno(aluno, lista_stc, nLis);
-	nLis++;
+   //printLisAluno(lista->lista, lista->tam);
 
-	strcpy(aluno.numMatricula, "201912345");
-  strcpy(aluno.nome, "Fulano Silva Oliveira");
-  strcpy(aluno.email,"fulsiloli@uesc.br");
-	incLisAluno(aluno, lista_stc, nLis);
-  nLis++;*/
 
-	//Procurando um elemento que está na lista
-	/*printLisAluno(lista_stc, nLis);
-	printf("Testando o método de busca 2 de um\n"); 
-	printf(" elemento que esta na lista: 201913425\n");
-	index = buscaLisAluno2(lista_stc, nLis, "201913425");
-	if(index < nLis){
-    printf("Elemanto achado com índice %d\n", index);
-		printItemLisAluno(lista_stc, index);
-  }else{
-    printf("Elemento não se encontra na lista!!\n");
-  }
 
-	//Procurando um elemento que não está na lista
-	printf("Testando o método de busca 2 de um\n"); 
-	printf(" elemento que não esta na lista: 201900000\n");
-	index = buscaLisAluno2(lista_stc, nLis, "201900000");
-	if(index < nLis){
-    printf("Elemanto achado com índice %d\n", index);
-		printItemLisAluno(lista_stc, index);
-  }else{
-    printf("Elemento não se encontra na lista!!\n");
-  }
 
-*/
-free(lista);
+  free(lista);
 	return 0;
 }
