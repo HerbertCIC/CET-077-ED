@@ -28,9 +28,10 @@ int main(void)
   
   printf("Testando Listas Lineares Sequenciais Não Ordenadas\n");
   printf("--------------------------------------------------\n");
+  
   //add um aluno ao arquivo
   tAluno aluno;
-  printf("Incluindo um aluno no arquivo\n");
+  printf("\nIncluindo um aluno no arquivo\n");
   printf("--------------------------------------------------\n");
   printf("Digite o numero de matricula: ");
   scanf("%s",aluno.numMatricula);
@@ -41,26 +42,27 @@ int main(void)
   printf("Digite o email do aluno: ");
   scanf("%s",aluno.email);
   if(incNaoOrdenada(aluno, lista)){
-     atualizar_arq(fp,lista,nome);
+     atualizar_arq(fp, lista, nome);
      printf("------------Adicionado com sucesso!!------------\n");
      printf("\nArquivo atualizado:\n");
      printLisAluno(lista->lista, lista->tam);
   }else
-    printf("\nNão foi possivel adicionar ao arquivo!");
+    printf("\nNao foi possivel adicionar ao arquivo!\n");
  
   printf("tamanho = %d\n", lista->tam);
- 
-  /*for(int j=0; j<i; j++){
-    printf("%s\n",lista->lista[j].numMatricula);
-    printf("%s",lista->lista[j].nome);
-    printf("%s\n",lista->lista[j].email);
-  }*/
 
-
-   //printLisAluno(lista->lista, lista->tam);
-
-
-
+  //remove um aluno do arquivo
+   printf("\nRemovendo um aluno do arquivo\n");
+  printf("--------------------------------------------------\n");
+  printf("Digite o numero da matricula do aluno que deseja remover: ");
+  scanf("%s", aluno.numMatricula);
+  if(remNaoOrdenada(aluno,lista)){
+     atualizar_arq(fp,lista,nome);
+     printf("------------Removido com sucesso!!------------\n");
+     printf("\nArquivo atualizado:\n");
+     printLisAluno(lista->lista, lista->tam);
+  }else
+    printf("\nNao foi possivel fazer a remoção\n");
 
   free(lista);
 	return 0;

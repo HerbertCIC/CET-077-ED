@@ -330,25 +330,25 @@ int incNaoOrdenada(tAluno aluno, tListAlunos* list){
 	  }else
       return FALSE;
 }
-/*
-int remNaoOrdenada(tAluno aluno, tListAlunos list){
+
+int remNaoOrdenada(tAluno aluno, tListAlunos* list){
 	// Retorna TRUE ou FALSE
 	// FALSE: Se o aluno não estiver na lista ou se a 
 	// lista já estiver vazia
-  int n = list.tam+1;
-  if(buscaNaoOrdenada(list, aluno.numMatricula) == n || n == 1){
+  int n = list->tam;
+  if(buscaNaoOrdenada(list, aluno.numMatricula) == n || n == 0){
     return FALSE;
   }else{
     int i = buscaNaoOrdenada(list, aluno.numMatricula);
 		for(int j = i; j < n; j++){
-			strcpy(list.lista[j].numMatricula, list.lista[j+1].numMatricula);
-			strcpy(list.lista[j].nome, list.lista[j+1].nome);
-			strcpy(list.lista[j].email, list.lista[j+1].email);
+			strcpy(list->lista[j].numMatricula, list->lista[j+1].numMatricula);
+			strcpy(list->lista[j].nome, list->lista[j+1].nome);
+			strcpy(list->lista[j].email, list->lista[j+1].email);
     }
-    list.tam--;
+    list->tam--;
     return TRUE;
   }
-}*/
+}
 
 int buscaOrdenada(tListAlunos list, char chave[], int* achou){
 	//retorna o indice onde achou 
@@ -427,7 +427,7 @@ void atualizar_arq(FILE* fp, tListAlunos* lista, char* nome){
     exit(-1);
   }
   int i=0;
-  for(; i < lista->tam+1; i++){
+  for(; i < lista->tam; i++){
     fprintf(fp,"%s\n", lista->lista[i].numMatricula);
     fprintf(fp,"%s", lista->lista[i].nome);
     fprintf(fp,"%s\n", lista->lista[i].email);
