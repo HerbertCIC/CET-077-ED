@@ -16,7 +16,7 @@ int main(void)
     exit(-1);
   }
   int i=0;
-  for(i=0;!feof(fp); i++){
+  for(i=0;!feof(fp) && i<lista->cap; i++){
     fscanf(fp,"%s\n", lista->lista[i].numMatricula);
     fgets(lista->lista[i].nome,99,fp);
     fscanf(fp,"%s\n", lista->lista[i].email);
@@ -25,17 +25,17 @@ int main(void)
   printf("Arquivo:\n");
   printLisAluno(lista->lista, lista->tam);
   printf("tamanho = %d\n", lista->tam);
-  
-  printf("Testando Listas Lineares Sequenciais Não Ordenadas\n");
-  printf("----------------------------------------\n");
+  printf("\n----------------------------------------\n");
+  printf("Testando Listas Lineares Sequenciais Não Ordenadas");
+  printf("\n----------------------------------------\n");
   
   //add um aluno ao arquivo
   tAluno aluno;
   char op=0;
   do{
- 
-    printf("\nIncluindo um aluno no arquivo\n");
-    printf("----------------------------------------\n");
+    printf("\n----------------------------------------\n");
+    printf("Incluindo um aluno no arquivo");
+    printf("\n----------------------------------------\n");
     printf("Digite o numero de matricula: ");
     scanf("%s",aluno.numMatricula);
     getchar();
@@ -60,8 +60,9 @@ int main(void)
 
   //remove um aluno do arquivo
   do{
-    printf("\nRemovendo um aluno do arquivo\n");
-    printf("----------------------------------------\n");
+    printf("\n----------------------------------------\n");
+    printf("Removendo um aluno do arquivo");
+    printf("\n----------------------------------------\n");
     printf("Digite o numero da matricula do aluno que deseja remover: ");
     scanf("%s", aluno.numMatricula);
     if(remNaoOrdenada(aluno,lista)){
@@ -72,19 +73,21 @@ int main(void)
     }else
       printf("\nNão foi possivel fazer a remoção\n");
 
-    printf("Deseja fazer outra inclusão (s/n)? ");
+    printf("Deseja fazer outra remoção (s/n)? ");
     scanf(" %c", &op);
   }while(op=='s' || op=='S');
 
   //Procurando um elemento que está na lista
-	printf("Testando o método de busca não ordenada\n"); 
+  printf("\n----------------------------------------\n");
+	printf("Testando o método de busca não ordenada"); 
+  printf("\n----------------------------------------\n");
   do{
     printf("Digite o numero da matricula para pesquisar: ");
     scanf("%s", aluno.numMatricula);
     int index = buscaNaoOrdenada(lista, aluno.numMatricula);
     if(index < lista->tam){
       printf("Elemento achado com índice %d\n", index);
-      printLisAluno(lista->lista, lista->tam);
+      printItemLisAluno(lista->lista, index);
     }else{
       printf("Elemento não se encontra na lista!!\n");
     }

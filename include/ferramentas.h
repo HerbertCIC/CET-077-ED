@@ -37,10 +37,13 @@ int buscaNaoOrdenada(tListAlunos* list, char chave[]);
 int incNaoOrdenada(tAluno aluno, tListAlunos* list);
 int remNaoOrdenada(tAluno aluno, tListAlunos* list);
 
-int buscaOrdenada(tListAlunos list, char chave[], int* achou);
-int incOrdenada(tAluno aluno, tListAlunos list);
-int remOrdenada(tAluno aluno, tListAlunos list);
+int buscaOrdenada(tListAlunos* list, char chave[], int* achou);
+int incOrdenada(tAluno aluno, tListAlunos* list);
+int remOrdenada(tAluno aluno, tListAlunos* list);
 void atualizar_arq(FILE* fp,tListAlunos* lista, char* nome);
+
+void mergeSort(tAluno* alunos, int inicio, int fim);
+void merge(tAluno* alunos, int inicio, int meio, int fim);
 
 typedef struct{
 	int lsize;			// capacidade da lista (tamanho do array)
