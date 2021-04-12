@@ -365,6 +365,30 @@ int buscaOrdenada(tListAlunos* list, char chave[], int* achou){
   return i;
 }
 
+int buscaOrdenadaBin(tListAlunos* lista, char chave[], int* achou)
+{
+	int min = 0;			
+	int max = lista->tam;			
+	int i;
+	*achou = FALSE;
+	while (min != max){
+		i = (max + min)/2; 
+		int com = strcmp(lista->lista[i].numMatricula, chave); 
+		if ( com < 0){
+			min = ++i; 
+		}else{ 
+			if (com > 0){
+				max = i; 
+			}else{
+				if (i < lista->tam) 
+					*achou = TRUE;
+				return i;
+			}
+		} 
+	}
+	return i;
+}
+
 int incOrdenada(tAluno aluno, tListAlunos* list){
 	
 	// Retorna TRUE ou FALSE
@@ -372,7 +396,7 @@ int incOrdenada(tAluno aluno, tListAlunos* list){
 	// lista já estiver cheia
   int achou;
   int n = list->tam;
-	int i = buscaOrdenada(list, aluno.numMatricula, &achou);
+	int i = buscaOrdenadaBin(list, aluno.numMatricula, &achou);
   printf("\ni = %d\n", i);
   printf("\nn = %d\n", n);
 	if (i == n && n <= list->cap){
