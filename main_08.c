@@ -110,8 +110,11 @@ void buscarAluno(tAluno aluno, tListAlunos* lista){
 }
 
 void listarAlunos(tListAlunos* lista){
-  printf("Arquivo:\n");
-  printLisAluno(lista->lista, lista->tam);
-  printf("Tamanho = %d\n", lista->tam);
+  if(strlen(lista->lista[0].numMatricula) =='\0')
+    printf("Lista vazia!\n");
+  else{
+    printf("Arquivo:\n");
+    printLisAluno(lista->lista, lista->tam);
+    printf("Tamanho = %d\n", lista->tam);
+  }
 }
-

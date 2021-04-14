@@ -1,3 +1,6 @@
+153608452
+Francisco
+francisquim@uesc.br
 201823142
 Fulano da Silva
 fulano@gmail.com
@@ -8,8 +11,8 @@ cicilio@uesc.br
 Einstein
 einstein@uesc.br
 202012354
+Shaolim
+matadordeporco@uesc.br
 Felipe
 felipao@uesc.br
 202014183
-Shaolim
-matadordeporco@uesc.br

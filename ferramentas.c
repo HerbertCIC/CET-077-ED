@@ -439,9 +439,8 @@ void atualizar_arq(FILE* fp, tListAlunos* lista, char* nome){
   if((fp=fopen(nome,"w"))==NULL){
     printf("Erro de abertura de arquivo!");
     exit(-1);
-  }
-  int i=0;
-  for(; i < lista->tam; i++){
+  }  
+  for(int i=0; i < lista->tam; i++){
     fprintf(fp,"%s\n", lista->lista[i].numMatricula);
     fprintf(fp,"%s", lista->lista[i].nome);
     fprintf(fp,"%s\n", lista->lista[i].email);
