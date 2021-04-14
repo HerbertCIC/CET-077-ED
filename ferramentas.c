@@ -337,7 +337,8 @@ int remNaoOrdenada(tAluno aluno, tListAlunos* list){
 	// FALSE: Se o aluno não estiver na lista ou se a 
 	// lista já estiver vazia
   int n = list->tam;
-  if(buscaNaoOrdenada(list, aluno.numMatricula) == n || n == 0){
+  int i = buscaNaoOrdenada(list, aluno.numMatricula);
+  if(i == n || n == 0){
     return FALSE;
   }else{
     int i = buscaNaoOrdenada(list, aluno.numMatricula);
@@ -351,21 +352,7 @@ int remNaoOrdenada(tAluno aluno, tListAlunos* list){
   }
 }
 
-int buscaOrdenada(tListAlunos* list, char chave[], int* achou){
-	//retorna o indice onde achou 
-  int i = 0;
-  int n = list->tam;
-	*achou = FALSE;  
-	strcpy(list->lista[n].numMatricula, chave); // adicionando chave no final
-  while(strcmp(list->lista[i].numMatricula, chave) < 0){
-    i++;
-  }
-	if((strcmp(list->lista[i].numMatricula, chave) == 0) && (i < n))
-		*achou = TRUE;
-  return i;
-}
-
-int buscaOrdenadaBin(tListAlunos* lista, char chave[], int* achou)
+int buscaOrdenada(tListAlunos* lista, char chave[], int* achou)
 {
 	int min = 0;			
 	int max = lista->tam;			
@@ -396,9 +383,7 @@ int incOrdenada(tAluno aluno, tListAlunos* list){
 	// lista já estiver cheia
   int achou;
   int n = list->tam;
-	int i = buscaOrdenadaBin(list, aluno.numMatricula, &achou);
-  printf("\ni = %d\n", i);
-  printf("\nn = %d\n", n);
+	int i = buscaOrdenada(list, aluno.numMatricula, &achou);
 	if (i == n && n <= list->cap){
 		strcpy(list->lista[n].numMatricula, aluno.numMatricula);
 		strcpy(list->lista[n].nome, aluno.nome);
@@ -437,7 +422,7 @@ int remOrdenada(tAluno aluno, tListAlunos* list){
   int achou;
   int n = list->tam;
   int i = buscaOrdenada(list, aluno.numMatricula, &achou);
-  if(!achou || list->tam == 0){
+  if(!achou){
     return FALSE;
   }else{
 		for(int j = i; j < n; j++){

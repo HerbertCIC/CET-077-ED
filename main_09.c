@@ -7,7 +7,8 @@ int main(void)
 { 
 	tListAlunos* lista;
   lista = malloc(1*sizeof(tListAlunos));
-  iniListAlunos(lista, 15);
+  iniListAlunos(lista, 6);
+
   // leitura de um arquivo
   FILE *fp;
   char path[20] = "dadosAlunos.txt";
@@ -22,18 +23,22 @@ int main(void)
     fscanf(fp,"%s\n", lista->lista[i].email);
   }
   lista->tam = i;
+
+  // imprime o arquivo
   printf("Arquivo:\n");
   printLisAluno(lista->lista, lista->tam);
   printf("tamanho = %d\n", lista->tam);
+
+  // ordena e imprime o arquivo
   printf("----------------------------------------\n");
   printf("Testando Listas Lineares Sequenciais Ordenadas\n");
   printf("----------------------------------------\n");
   mergeSort(lista->lista, 0, lista->tam-1);
   atualizar_arq(fp, lista, path);
-
   printf("Arquivo Ordenado:\n");
   printLisAluno(lista->lista, lista->tam);
-  
+
+  // inclue um aluno ao arquivo
   tAluno aluno;
   char op=0;
   do{ 
@@ -55,14 +60,13 @@ int main(void)
       printf("\nArquivo atualizado:\n");
       printLisAluno(lista->lista, lista->tam);
     }else
-      printf("\nNão foi possivel adicionar ao arquivo!\n");
-  
+      printf("\nNão foi possivel adicionar ao arquivo!\n");  
     printf("tamanho = %d\n", lista->tam);
-    printf("Deseja fazer outra inclusão (s/n)? ");
+    printf("\nDeseja fazer outra inclusão (s/n)? ");
     scanf(" %c", &op);
   }while(op=='s' || op=='S');
   
-  //remove um aluno do arquivo
+  // remove um aluno do arquivo
   do{
     printf("\n----------------------------------------\n");
     printf("Removendo um aluno do arquivo");
@@ -76,17 +80,15 @@ int main(void)
       printLisAluno(lista->lista, lista->tam);
     }else
       printf("\nNão foi possivel fazer a remoção\n");
-
-    printf("Deseja fazer outra remoção (s/n)? ");
+    printf("\nDeseja fazer outra remoção (s/n)? ");
     scanf(" %c", &op);
   }while(op=='s' || op=='S');
 
-  //Procurando um elemento que está na lista
+  // Procura um elemento que está na lista
   printf("\n----------------------------------------\n");
 	printf("Testando o método de busca ordenada"); 
   printf("\n----------------------------------------\n");
   do{
-    	//Procurando um elemento que está na lista
     printf("Digite o numero da matricula para pesquisar: ");
     scanf("%s", aluno.numMatricula);
     int achou;
@@ -97,7 +99,7 @@ int main(void)
     }else{
       printf("Elemento não se encontra na lista!!\n");
     }
-    printf("Deseja fazer outra inclusão (s/n)? ");
+    printf("\nDeseja fazer outra busca (s/n)? ");
     scanf(" %c", &op);
   }while(op=='s' || op=='S');
 
