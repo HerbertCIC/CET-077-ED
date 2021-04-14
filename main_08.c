@@ -13,13 +13,14 @@ int main(void)
 { 
   //declaração
 	tListAlunos* lista;
-  lista = malloc(1*sizeof(tListAlunos));
-  iniListAlunos(lista, 6);
+  lista = malloc(1*sizeof(tListAlunos));  
   tAluno aluno; 
   FILE *fp; 
   char path[20] = "dadosAlunos.txt";
   char op=0;  
-  int i=0;  
+  int i=0;
+  
+  iniListAlunos(lista, 6);
   // leitura de um arquivo  
   if((fp=fopen(path,"r"))==NULL){
     printf("Erro");
@@ -63,7 +64,7 @@ void menu(){
     printf("\n------------------------------------------------\n");
     printf("Testando Listas Lineares Sequenciais Não Ordenadas");
     printf("\n------------------------------------------------\n");
-    printf("Digite uma opcao:\n");
+    printf("Digite uma opção:\n");
     printf("(1) Incluir aluno\n(2) Remover aluno\n(3) Pesquisar aluno\n(4) Listar todos os alunos\n(5) Sair\n");
 }
 
@@ -113,3 +114,4 @@ void listarAlunos(tListAlunos* lista){
   printLisAluno(lista->lista, lista->tam);
   printf("Tamanho = %d\n", lista->tam);
 }
+
