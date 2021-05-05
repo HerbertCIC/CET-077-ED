@@ -10,11 +10,39 @@ typedef struct{
 } tAluno;
 
 typedef struct{
+	tAluno* pilha;
+	int cap;  //pilha vazia quando topo = 0
+	int topo; //pilha cheia quando topo = cap
+}tPilhaAlunos; //last in first out - lifo
+// topo = 0
+void iniPilhaAlunos(tPilhaAlunos* pilha, int cap); 
+int incPilhaAlunos(tAluno aluno, tPilhaAlunos* pilha);
+int remPilhaAlunos(tAluno* aluno, tPilhaAlunos* pilha);
+
+typedef struct{
+	tAluno* fila;
+	int cap;
+	int ini; 	//fila vazia quando ?
+	int fim;  //fila cheia quando ?
+}tFilaAlunos; //first in first out - fifo
+// ini = -1   fim = 0
+void iniFilaAlunos(tFilaAlunos* fila, int cap);
+int incFilaAlunos(tAluno aluno, tFilaAlunos* fila);
+int remFilaAlunos(tAluno* aluno, tFilaAlunos* fila);
+
+typedef struct{
 	tAluno* lista;
 	int cap;
 	int tam;
 } tListAlunos;
 
+void iniListAlunos(tListAlunos* list, int cap);
+int buscaNaoOrdenada(tListAlunos* list, char chave[10]);
+int incNaoOrdenada(tAluno aluno, tListAlunos* list);
+int remNaoOrdenada(tAluno aluno, tListAlunos* list);
+int buscaOrdenada(tListAlunos* list, char chave[10], int* achou);
+int incOrdenada(tAluno aluno, tListAlunos* list);
+int remOrdenada(tAluno aluno, tListAlunos* list);
 
 int buscaLisAluno(tAluno lista[], int n, char chave[]);
 int buscaLisAluno2(tAluno lista[], int n, char chave[]);
@@ -25,26 +53,14 @@ int buscaLisAlunoOrd(tAluno lista[], int n, char chave[], int* achou);
 int buscaLisAlunoOrdRec(tAluno lista[], int n, char chave[], int* achou);
 int buscaLisAlunoBin(tAluno lista[], int n, char chave[], int* achou);
 int buscaLisAlunoBinRec(tAluno lista[], int n, char chave[], int* achou);
-
 int incLisAlunoOrd(tAluno aluno, tAluno lista[], int n);
 
 void printLisAluno(tAluno lista[], int n);
 void printItemLisAluno(tAluno lista[], int n);
+void printAluno(tAluno aluno);
 
-void iniListAlunos(tListAlunos* list, int cap);
-
-int buscaNaoOrdenada(tListAlunos* list, char chave[]);
-int incNaoOrdenada(tAluno aluno, tListAlunos* list);
-int remNaoOrdenada(tAluno aluno, tListAlunos* list);
-
-int buscaOrdenada(tListAlunos* list, char chave[], int* achou);
-int buscaOrdenadaBin(tListAlunos* lista, char chave[], int* achou);
-int incOrdenada(tAluno aluno, tListAlunos* list);
-int remOrdenada(tAluno aluno, tListAlunos* list);
-void atualizar_arq(FILE* fp,tListAlunos* lista, char* nome);
-
-void mergeSort(tAluno* alunos, int inicio, int fim);
-void merge(tAluno* alunos, int inicio, int meio, int fim);
+void  itoa ( unsigned int value, char * str);
+void geraAlunos(tListAlunos* lista);
 
 typedef struct{
 	int lsize;			// capacidade da lista (tamanho do array)
