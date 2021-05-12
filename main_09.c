@@ -4,7 +4,7 @@
 
 #include "include/ferramentas.h"
 
-#define LSIZE 20
+#define LSIZE 21
 #define PSIZE 20
 #define FSIZE 20
 
@@ -25,7 +25,8 @@ int main(void){
     else{
       printf("Pilha cheia!\n"); 
       break;
-    }   
+    }
+    //printAluno(aluno);    
   }
   printf("\n");
 
@@ -43,24 +44,19 @@ int main(void){
   printf("\n-----Teste FILAS-----\n");
   for(int i=0; i<= LSIZE; i++){
     if(incFilaAlunos(lista.lista[i], &fila)){
-      if(fila.fim < fila.cap)
-        printf("Elemento incluido no indice [%d]\n", fila.fim-1);
-      else
-        printf("Elemento incluido no indice [%d]\n", (fila.fim-1)%fila.cap);      
+        printf("Elemento incluido no indice [%d]\n", (fila.fim-1)%fila.cap);
     }else{
         printf("Lista cheia!\n");
         break;
-    }       
+    }
+    //printAluno(aluno);        
   }
   printf("\n");
 
   for(int i=0; i< LSIZE/2; i++){
     tAluno aluno;
-    if(remFilaAlunos(&aluno, &fila)){
-      if(fila.ini < fila.cap)
-        printf("Elemento removido no indice [%d]\n", fila.ini-1);
-      else
-        printf("Elemento removido no indice [%d]\n", (fila.ini-1)%fila.cap);      
+    if(remFilaAlunos(&aluno, &fila)){   
+        printf("Elemento removido no indice [%d]\n", (fila.ini-1)%fila.cap);
     }else{
         printf("Lista vazia!\n");
         break;
@@ -70,15 +66,13 @@ int main(void){
   printf("\n");
 
   for(int i=0; i< LSIZE; i++){
-    if(incFilaAlunos(lista.lista[i], &fila)){
-      if(fila.fim < fila.cap)
-        printf("Elemento incluido no indice [%d]\n", fila.fim-1);
-      else
-        printf("Elemento incluido no indice [%d]\n", (fila.fim-1)%fila.cap);      
+    if(incFilaAlunos(lista.lista[i], &fila)){     
+        printf("Elemento incluido no indice [%d]\n", (fila.fim-1)%fila.cap);
     }else{
         printf("Lista cheia!\n");
         break;
-    }       
+    }
+    //printAluno(aluno);        
   }
   printf("\n");
 

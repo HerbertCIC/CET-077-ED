@@ -473,10 +473,6 @@ void iniFilaAlunos(tFilaAlunos* fila, int cap){
 int incFilaAlunos(tAluno aluno, tFilaAlunos* fila){
   if(fila->fim - fila->ini == fila->cap){
     return FALSE;
-  }else if(fila->fim < fila->cap){    
-    strcpy(fila->fila[fila->fim].numMatricula, aluno.numMatricula);
-    strcpy(fila->fila[fila->fim].nome, aluno.nome);
-    strcpy(fila->fila[fila->fim].email, aluno.email);    
   }else{
     strcpy(fila->fila[fila->fim%fila->cap].numMatricula, aluno.numMatricula);
     strcpy(fila->fila[fila->fim%fila->cap].nome, aluno.nome);
@@ -489,10 +485,6 @@ int incFilaAlunos(tAluno aluno, tFilaAlunos* fila){
 int remFilaAlunos(tAluno* aluno, tFilaAlunos* fila){
   if(fila->ini == fila->fim){
     return FALSE;
-  }else if(fila->ini < fila->cap){    
-    strcpy(aluno->numMatricula, fila->fila[fila->ini].numMatricula);
-    strcpy(aluno->nome, fila->fila[fila->ini].nome);
-    strcpy(aluno->email, fila->fila[fila->ini].email);    
   }else{    
     strcpy(aluno->numMatricula, fila->fila[fila->ini%fila->cap].numMatricula);
     strcpy(aluno->nome, fila->fila[fila->ini%fila->cap].nome);
@@ -526,5 +518,3 @@ void geraAlunos(tListAlunos* lista){
 		incNaoOrdenada(aluno, lista);
 	}
 }
-
-
