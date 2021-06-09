@@ -36,7 +36,7 @@ typedef struct{
 	int tam;
 } tListAlunos;
 
-void  itoa ( unsigned int value, char * str);
+void  itoaT( unsigned int value, char * str);
 void geraAlunos(tListAlunos* lista);
 
 void iniListAlunos(tListAlunos* list, int cap);
