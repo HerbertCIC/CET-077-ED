@@ -93,6 +93,28 @@ struct noALuno2{
 typedef struct noALuno2 NOALUNOD;
 typedef NOALUNOD *PONTD;
 
+typedef struct{
+	PONTD head; //ini
+	PONTD tail; //fim
+	int tam;
+}tListDuplaEncAlunos;
+
+PONTD iniListaDuplaEncAluno(void);
+PONTD conListSeqListDuplaEnc(tListAlunos* listaS);
+void ini_tListDuplaEncAlunos(tListDuplaEncAlunos* lista);
+PONTD getAluno2(int n, tListDuplaEncAlunos lista);
+PONTD buscaOrd_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou);
+PONTD buscaBin_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou);
+int incOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
+int remOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
+
+PONTD conListSeqDuplaListEnc(tListAlunos* listaS);
+
+void printListaDuplaEncAluno(tListDuplaEncAlunos lista);
+PONTD buscaListaDuplaEncOrdAluno(PONT head, char chave[10]);
+
+
+
 /*
 PONT conListSeq2ListEnc_R(tListAlunos* listaS);
 

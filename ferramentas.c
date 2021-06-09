@@ -569,7 +569,7 @@ void geraAlunos(tListAlunos* lista){
 	unsigned int matricula;
 	tAluno aluno;
 	while(lista->tam < lista->cap){
-		matricula = (2017 + random()%5)*100000 + random()%100000; 
+		matricula = (2017 + rand()%5)*100000 + rand()%100000; 
 		itoaT(matricula, aluno.numMatricula);
   		strcpy(aluno.nome, "Nome SobrenomeM SobrenomeP");
   		strcpy(aluno.email,"NSmSp@uesc.br");
@@ -797,6 +797,18 @@ PONTD iniListaDuplaEncAluno(void){
 	return head;
 }
 
+void printListaDuplaEncAluno(tListDuplaEncAlunos lista){
+	PONTD tail = lista.head;
+	printf("[\n");
+	while(tail->prox != lista.tail){
+		tail = tail->prox;
+		printf("%s, ", tail->numMatricula);
+		printf("%s, ", tail->nome);
+		printf("%s\n", tail->email);
+	}
+	printf(" ]\n");
+}
+
 // Criando uma lista duplamente encadeada com base numa lista sequencial
 PONTD conListSeqListDuplaEnc(tListAlunos* listaS){
 	PONTD head, tail; 
@@ -816,7 +828,7 @@ PONTD conListSeqListDuplaEnc(tListAlunos* listaS){
 	return head;	
 }
 
-void ini_tListDuplaEncAlunos(tListEncAlunos* lista){
+void ini_tListDuplaEncAlunos(tListDuplaEncAlunos* lista){
 	lista->head = iniListaDuplaEncAluno();
 	lista->tail = iniListaDuplaEncAluno();
 	lista->tam = 0;
@@ -824,7 +836,7 @@ void ini_tListDuplaEncAlunos(tListEncAlunos* lista){
 	lista->head->prox = lista->tail; // Lista vazia head.prox = tail 
 }
 
-PONTD getAluno(int n, tListEncAlunos lista){
+PONTD getAluno2(int n, tListDuplaEncAlunos lista){
 	PONTD tail = lista.head;
 	if(n >= lista.tam){
 		return NULL;
@@ -835,7 +847,7 @@ PONTD getAluno(int n, tListEncAlunos lista){
 	return tail;
 }
 
-PONTD buscaOrd_tListDuplaEncAlunos(tListEncAlunos lista, char chave[10], int* achou){
+PONTD buscaOrd_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou){
 	PONTD tail = lista.head;	
 	int com = strcmp(tail->prox->numMatricula, chave);
 	while(com < 0){
@@ -846,7 +858,7 @@ PONTD buscaOrd_tListDuplaEncAlunos(tListEncAlunos lista, char chave[10], int* ac
 	return tail->prox;
 }
 
-PONTD buscaBin_tListDuplaEncAlunos(tListEncAlunos lista, char chave[10], int* achou)
+PONTD buscaBin_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou)
 {	
 	int min, max = lista.tam;//9
 	min = max/2;	//4
@@ -855,7 +867,7 @@ PONTD buscaBin_tListDuplaEncAlunos(tListEncAlunos lista, char chave[10], int* ac
 	while (max-min != 1)	{//9-4=5, 5-2=3, 3-1=2
 	
 		int i = max-min;//5//3//2
-		aluno = getAluno(min, lista);//5//3//2
+		aluno = getAluno2(min, lista);//5//3//2
 		int com = strcmp(aluno->prox->numMatricula, chave);
 		if (com < 0)
 		{			
@@ -880,7 +892,7 @@ PONTD buscaBin_tListDuplaEncAlunos(tListEncAlunos lista, char chave[10], int* ac
 	return aluno->prox;
 }
 
-int incOrd_tListDuplaEncAlunos(tAluno aluno, tListEncAlunos* lista){
+int incOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista){
 	int achou;
 	PONTD no = buscaOrd_tListDuplaEncAlunos(*lista, aluno.numMatricula, &achou);
 	//PONTD no = buscaBin_tListDuplaEncAlunos(*lista, aluno.numMatricula, &achou);
@@ -899,7 +911,7 @@ int incOrd_tListDuplaEncAlunos(tAluno aluno, tListEncAlunos* lista){
 	return FALSE; // aluno já esta na lista
 }
 
-int remOrd_tListDuplaEncAlunos(tAluno aluno, tListEncAlunos* lista){
+int remOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista){
 	int achou;
 	//if(lista->head->prox == lista->tail)
 	//	return FALSE; //lista esta vazia
