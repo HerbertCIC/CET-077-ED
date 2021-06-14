@@ -1,23 +1,22 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "include/ferramentas.h"
 
 /*
 Implementa a busca numa lista linear de alocação sequencial
-do tipo tAluno. Nesta função se trabalha com uma lista 
-definida como um array de forma estática. 
+do tipo tAluno. Nesta função se trabalha com uma lista
+definida como um array de forma estática.
 Entrada:
-- lista: Uma lista sequencial estática na forma de uma referência 
+- lista: Uma lista sequencial estática na forma de uma referência
 	um array de tipo tAluno.
 - n: Tamanho da lista, ou seja os índices dos elementos da lista
-	vão de 0 até n-1; 
-- chave: Número de matrícula do aluno que está sendo procurado. 
+	vão de 0 até n-1;
+- chave: Número de matrícula do aluno que está sendo procurado.
 	Para evitar ambiguidades, supõe-se que todas as chaves são
 	distintas;
 saída:
 - A função retorna o índice da lista que possui a chave procurada.
-	Caso a chave não pertença a nenhum dos elementos da lista a 
+	Caso a chave não pertença a nenhum dos elementos da lista a
 	função retorna n;
 */
 int buscaLisAluno(tAluno lista[], int n, char chave[10])
@@ -32,7 +31,7 @@ int buscaLisAluno(tAluno lista[], int n, char chave[10])
 	return n; //não achou, retorna n
 }
 
-/* 
+/*
 Implementação ecursiva da função:
 
 int buscaLisAluno(tAluno lista[], int n, char chave[10])
@@ -58,22 +57,22 @@ int buscaLisAlunoRec(tAluno lista[], int n, char chave[])
 
 /*
 Implementa a busca numa lista linear de alocação sequencial
-do tipo tAluno. Nesta função se trabalha com uma lista 
-definida como um array de forma estática. 
+do tipo tAluno. Nesta função se trabalha com uma lista
+definida como um array de forma estática.
 Entrada:
-- lista: Uma lista sequencial estática na forma de uma referência 
+- lista: Uma lista sequencial estática na forma de uma referência
 	um array de tipo tAluno.
 - n: Tamanho da lista, ou seja os índices dos elementos da lista
-	vão de 0 até n-1. Para melhorar o algoritmo se adiciona a 
+	vão de 0 até n-1. Para melhorar o algoritmo se adiciona a
 	chave procurada ao elemento da posição n, que não pertence
 	à lista. Se pressupõe que a lista tem capacidade para
 	armazenar informação na posição de índice n;
-- chave: Número de matrícula do aluno que está sendo procurado. 
+- chave: Número de matrícula do aluno que está sendo procurado.
 	Para evitar ambiguidades, supõe-se que todas as chaves são
 	distintas;
 saída:
 - A função retorna o índice da lista que possui a chave procurada.
-	Caso a chave não pertença a nenhum dos elementos da lista a 
+	Caso a chave não pertença a nenhum dos elementos da lista a
 	função retorna n;
 */
 int buscaLisAluno2(tAluno lista[], int n, char chave[])
@@ -87,7 +86,7 @@ int buscaLisAluno2(tAluno lista[], int n, char chave[])
 	return i;
 } //O(n)
 
-/* 
+/*
 Implementação ecursiva da função:
 
 int buscaLisAluno2(tAluno lista[], int n, char chave[10])
@@ -109,29 +108,29 @@ int buscaLisAlunoRec2(tAluno lista[], int n, char chave[])
 
 /*
 Implementa a busca numa lista linear de alocação sequencial
-do tipo tAluno. Nesta função se trabalha com uma lista 
+do tipo tAluno. Nesta função se trabalha com uma lista
 definida como um array de forma estática, na qual elementos
-foram inseridos de forma ordenada, em ordem crescente, de 
-acordo com o campo chave numMatricula). 
+foram inseridos de forma ordenada, em ordem crescente, de
+acordo com o campo chave numMatricula).
 Entrada:
-- lista: Uma lista sequencial estática na forma de uma referência 
+- lista: Uma lista sequencial estática na forma de uma referência
 	um array de tipo tAluno.
 - n: Tamanho da lista, ou seja os índices dos elementos da lista
-	vão de 0 até n-1. Para melhorar o algoritmo se adiciona a 
+	vão de 0 até n-1. Para melhorar o algoritmo se adiciona a
 	chave procurada ao elemento da posição n, que não pertence
 	à lista. Se pressupõe que a lista tem capacidade para
-	armazenar informação na posição de índice n; 
-- chave: Número de matrícula do aluno que está sendo procurado. 
+	armazenar informação na posição de índice n;
+- chave: Número de matrícula do aluno que está sendo procurado.
 	Para evitar ambiguidades, supõe-se que todas as chaves são
 	distintas;
-- achou: Referência para retornar um boolean que relata o 
+- achou: Referência para retornar um boolean que relata o
 	sucesso da busca;
 saída:
 - A função retorna um índice da lista e um resultado boolean
 	que significa:
-	* se achou for TRUE o índice retornado indica o posição da 
+	* se achou for TRUE o índice retornado indica o posição da
 	lista onde se encontra o elemento que possui a chave procurada.
-	* se achou for FALSE o índice retornado indica o posição da 
+	* se achou for FALSE o índice retornado indica o posição da
 	lista onde um elemento com essa chave deveria ser inserido na
 	lista, de acordo com a ordem crescente estabelecida;
 */
@@ -149,13 +148,13 @@ int buscaLisAlunoOrd(tAluno lista[], int n, char chave[], int *achou)
 	return i;
 } // O(n)
 
-/* 
+/*
 Implementação ecursiva da função:
 
 int buscaLisAlunoOrd(tAluno lista[], int n, char chave[], int* achou)
 Para o funcionamento correto desta implementação, a inserção
 da chave procurada na posição de índice n deve ser feita
-antes da chamada à função e a varável referenciada por achou deve 
+antes da chamada à função e a varável referenciada por achou deve
 ser inicializada com valor FALSE;
 */
 int buscaLisAlunoOrdRec(tAluno lista[], int n, char chave[], int *achou)
@@ -172,26 +171,26 @@ int buscaLisAlunoOrdRec(tAluno lista[], int n, char chave[], int *achou)
 
 /*
 Implementa a busca binaria numa lista linear de alocação
-sequencial do tipo tAluno. Nesta função se trabalha com uma 
+sequencial do tipo tAluno. Nesta função se trabalha com uma
 lista definida como um array de forma estática, na qual elementos
-foram inseridos de forma ordenada, em ordem crescente, de 
-acordo com o campo chave numMatricula). 
+foram inseridos de forma ordenada, em ordem crescente, de
+acordo com o campo chave numMatricula).
 Entrada:
-- lista: Uma lista sequencial estática na forma de uma referência 
+- lista: Uma lista sequencial estática na forma de uma referência
 	um array de tipo tAluno.
 - n: Tamanho da lista, ou seja os índices dos elementos da lista
 	vão de 0 até n-1.
-- chave: Número de matrícula do aluno que está sendo procurado. 
+- chave: Número de matrícula do aluno que está sendo procurado.
 	Para evitar ambiguidades, supõe-se que todas as chaves são
 	distintas;
-- achou: Referência para retornar um boolean que relata o 
+- achou: Referência para retornar um boolean que relata o
 	sucesso da busca;
 saída:
 - A função retorna um índice da lista e um resultado boolean
 	que significa:
-	* se achou for TRUE o índice retornado indica o posição da 
+	* se achou for TRUE o índice retornado indica o posição da
 	lista onde se encontra o elemento que possui a chave procurada.
-	* se achou for FALSE o índice retornado indica o posição da 
+	* se achou for FALSE o índice retornado indica o posição da
 	lista onde um elemento com essa chave deveria ser inserido na
 	lista, de acordo com a ordem crescente estabelecida;
 */
@@ -226,7 +225,7 @@ int buscaLisAlunoBin(tAluno lista[], int n, char chave[], int *achou)
 	return i;
 } //O(log_2(n))
 
-/* 
+/*
 Implementação ecursiva da função:
 
 int buscaLisAlunoBin(tAluno lista[], int n, char chave[], int* achou)
@@ -569,7 +568,7 @@ void geraAlunos(tListAlunos* lista){
 	unsigned int matricula;
 	tAluno aluno;
 	while(lista->tam < lista->cap){
-		matricula = (2017 + rand()%5)*100000 + rand()%100000; 
+		matricula = (2017 + rand()%5)*100000 + rand()%100000;
 		itoaT(matricula, aluno.numMatricula);
   		strcpy(aluno.nome, "Nome SobrenomeM SobrenomeP");
   		strcpy(aluno.email,"NSmSp@uesc.br");
@@ -581,7 +580,7 @@ void  itoaT ( unsigned int value, char * str){
 	char numArray[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	for (int i = 8; i >= 0; i--){
 		str[i] = numArray[value % 10];
-		value /=10; 
+		value /=10;
 	}
 	str[9] = '\0';
 }
@@ -596,9 +595,9 @@ PONT iniListaEncAluno(void){
 
 // Criando uma lista simplesmente encadeada com base numa lista sequencial
 PONT conListSeq2ListEnc(tListAlunos* listaS){
-	PONT head, tail; 
+	PONT head, tail;
 	head = iniListaEncAluno(); //Criamos uma lsita encadeada vazia
-	if (listaS->tam > 0){ // Se a lista seq não estiver vazia 
+	if (listaS->tam > 0){ // Se a lista seq não estiver vazia
 		tail = head;
 		for(int i = 0; i < listaS->tam; i++){ // preenchemos com os elementos
 			tail->prox = (PONT)malloc(sizeof(NOALUNO));
@@ -609,7 +608,7 @@ PONT conListSeq2ListEnc(tListAlunos* listaS){
 		}
 		tail->prox = NULL;
 	}
-	return head;	
+	return head;
 }
 
 void printListaEncAluno(PONT head){
@@ -644,7 +643,7 @@ PONT buscaListaEncNaoOrdAluno(PONT head, char chave[10]){
 		tail = tail->prox;
 	}
 	//return tail->prox;
-	return tail; 
+	return tail;
 }
 
 void ini_tListEncAlunos(tListEncAlunos* lista){
@@ -652,14 +651,14 @@ void ini_tListEncAlunos(tListEncAlunos* lista){
 	lista->tail = iniListaEncAluno();
 	lista->tam = 0;
 	strcpy(lista->tail->numMatricula, "999999999"); // Para listas ordenadas
-	lista->head->prox = lista->tail; // Lista vazia head.prox = tail 
+	lista->head->prox = lista->tail; // Lista vazia head.prox = tail
 }
 
 PONT busca_tListEncAlunos(tListEncAlunos lista, char chave[10]){
 
 	PONT tail = lista.tail;
 	strcpy(tail->numMatricula, chave);
-	tail = lista.head; 
+	tail = lista.head;
 	while(strcmp(tail->prox->numMatricula, chave) != 0){
 		tail = tail->prox;
 	}
@@ -670,7 +669,7 @@ int inc_tListEncAlunos(tAluno aluno, tListEncAlunos* lista){
 	PONT no = busca_tListEncAlunos(*lista, aluno.numMatricula);
 	if (no->prox == lista->tail){ // o aluno não esta na lista
 		PONT novo = iniListaEncAluno(); //Criando um novo no
-		strcpy(novo->numMatricula, aluno.numMatricula); 
+		strcpy(novo->numMatricula, aluno.numMatricula);
 		strcpy(novo->nome, aluno.nome); // copia aluno para o novo no
 		strcpy(novo->email, aluno.email);
 		novo->prox = lista->tail; // o novo no aponta para o tail
@@ -703,7 +702,7 @@ PONT buscaOrd_tListEncAlunos(tListEncAlunos lista, char chave[10], int* achou){
 		tail = tail->prox;
 		com = strcmp(tail->prox->numMatricula, chave);
 	}
-	*achou = (com == 0); 
+	*achou = (com == 0);
 	return tail;
 }
 
@@ -713,7 +712,7 @@ int incOrd_tListEncAlunos(tAluno aluno, tListEncAlunos* lista){
 	PONT no = buscaBin_tListEncAlunos(*lista, aluno.numMatricula, &achou);
 	if(!achou){ // o aluno não esta na lista
 		PONT novo = iniListaEncAluno(); //Criando um novo no
-		strcpy(novo->numMatricula, aluno.numMatricula); 
+		strcpy(novo->numMatricula, aluno.numMatricula);
 		strcpy(novo->nome, aluno.nome); // copia aluno para o novo no
 		strcpy(novo->email, aluno.email);
 		novo->prox = no->prox; // o novo no aponta para o proximo
@@ -752,14 +751,14 @@ PONT getAluno(int n, tListEncAlunos lista){
 }
 
 PONT buscaBin_tListEncAlunos(tListEncAlunos lista, char chave[10], int* achou)
-{	
+{
 	int min = 0;
 	int max = lista.tam;
 	int i;
 	*achou = FALSE;
 	PONT aluno = lista.head;
 	while (min != max)
-	{	
+	{
 		i = (max + min) / 2;
 		aluno = getAluno(i, lista);
 		int com = strcmp(aluno->prox->numMatricula, chave);
@@ -790,18 +789,30 @@ PONT buscaBin_tListEncAlunos(tListEncAlunos lista, char chave[10], int* achou)
 
 // Cria um ponteiro para o head de uma lista duplamente encadeada
 PONTD iniListaDuplaEncAluno(void){
-	PONTD head; 
-    head = (PONTD) malloc(sizeof(NOALUNO)); 
+	PONTD head;
+    head = (PONTD) malloc(sizeof(NOALUNOD));
 	head->ant = NULL;
-	head->prox = NULL; 
+	head->prox = NULL;
 	return head;
 }
 
-void printListaDuplaEncAluno(tListDuplaEncAlunos lista){
+void printListaDuplaEncAluno(PONTD head){
+	PONTD tail = head;
+	printf("[\n");
+	while(tail != NULL){
+		printf("%s, ", tail->numMatricula);
+		printf("%s, ", tail->nome);
+		printf("%s\n", tail->email);
+        tail = tail->prox;
+	}
+	printf(" ]\n");
+}
+
+void printListaDuplaEncAluno2(tListDuplaEncAlunos lista){
 	PONTD tail = lista.head;
 	printf("[\n");
 	while(tail->prox != lista.tail){
-		tail = tail->prox;
+        tail = tail->prox;
 		printf("%s, ", tail->numMatricula);
 		printf("%s, ", tail->nome);
 		printf("%s\n", tail->email);
@@ -809,23 +820,25 @@ void printListaDuplaEncAluno(tListDuplaEncAlunos lista){
 	printf(" ]\n");
 }
 
+
+
 // Criando uma lista duplamente encadeada com base numa lista sequencial
 PONTD conListSeqListDuplaEnc(tListAlunos* listaS){
-	PONTD head, tail; 
+	PONTD head, tail;
 	head = iniListaDuplaEncAluno(); //Criamos uma lista dupla encadeada vazia
-	if (listaS->tam > 0){ // Se a lista seq não estiver vazia 
+	if (listaS->tam > 0){ // Se a lista seq não estiver vazia
 		tail = head;
 		for(int i = 0; i < listaS->tam; i++){ // preenchemos com os elementos
 			tail->prox = (PONTD)malloc(sizeof(NOALUNO));
 			tail->prox->ant = tail;
-			tail = tail->prox;			
+			tail = tail->prox;
 			strcpy(tail->numMatricula, listaS->lista[i].numMatricula);
     		strcpy(tail->nome, listaS->lista[i].nome);
     		strcpy(tail->email,listaS->lista[i].email);
 		}
 		tail->prox = NULL;
 	}
-	return head;	
+	return head;
 }
 
 void ini_tListDuplaEncAlunos(tListDuplaEncAlunos* lista){
@@ -833,7 +846,7 @@ void ini_tListDuplaEncAlunos(tListDuplaEncAlunos* lista){
 	lista->tail = iniListaDuplaEncAluno();
 	lista->tam = 0;
 	strcpy(lista->tail->numMatricula, "999999999"); // Para listas ordenadas
-	lista->head->prox = lista->tail; // Lista vazia head.prox = tail 
+	lista->head->prox = lista->tail; // Lista vazia head.prox = tail
 }
 
 PONTD getAluno2(int n, tListDuplaEncAlunos lista){
@@ -848,63 +861,61 @@ PONTD getAluno2(int n, tListDuplaEncAlunos lista){
 }
 
 PONTD buscaOrd_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou){
-	PONTD tail = lista.head;	
-	int com = strcmp(tail->prox->numMatricula, chave);
-	while(com < 0){
-		tail = tail->prox;
-		com = strcmp(tail->prox->numMatricula, chave);
-	}
-	*achou = (com == 0); 
-	return tail->prox;
+	PONTD tail = lista.head;
+        int com = strcmp(tail->prox->numMatricula, chave);
+        while(com < 0){
+            tail = tail->prox;
+            com = strcmp(tail->prox->numMatricula, chave);
+        }
+        *achou = (com == 0);
+        return tail->prox;
 }
 
 PONTD buscaBin_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou)
-{	
-	int min, max = lista.tam;//9
-	min = max/2;	//4
-	*achou = FALSE;
-	PONTD aluno = lista.head;
-	while (max-min != 1)	{//9-4=5, 5-2=3, 3-1=2
-	
-		int i = max-min;//5//3//2
-		aluno = getAluno2(min, lista);//5//3//2
-		int com = strcmp(aluno->prox->numMatricula, chave);
-		if (com < 0)
-		{			
-			max = i;//5
-			min = max/2;//2
-			lista.head = aluno;//[5]
-		}
-		else
-		{
-			if (com > 0)
-			{
-				max = i;//3
-				min = max/2;//1						
-			}
-			else
-			{
-				*achou = TRUE;
-				return aluno->prox;
-			}
-		}
-	}
-	return aluno->prox;
+{
+    PONTD aluno = lista.head;
+        int min, max = lista.tam;//9
+        min = max/2;	//4
+        *achou = FALSE;
+        while (max-min > 1)	{//9-4=5, 5-2=3, 3-1=2
+            int i = max-min;//5//3//2
+            aluno = getAluno2(min, lista);//5//3//2
+            int com = strcmp(aluno->prox->numMatricula, chave);
+            if (com < 0)
+            {
+                max = i;//5
+                min = max/2;//2
+                lista.head = aluno;//[5]
+            }
+            else
+            {
+                if (com > 0)
+                {
+                    max = i;//3
+                    min = max/2;//1
+                }
+                else
+                {
+                    *achou = TRUE;
+                    return aluno->prox;
+                }
+            }
+        }
+        return aluno->prox;
 }
 
 int incOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista){
 	int achou;
-	PONTD no = buscaOrd_tListDuplaEncAlunos(*lista, aluno.numMatricula, &achou);
-	//PONTD no = buscaBin_tListDuplaEncAlunos(*lista, aluno.numMatricula, &achou);
+	//PONTD no = buscaOrd_tListDuplaEncAlunos(*lista, aluno.numMatricula, &achou);
+	PONTD no = buscaBin_tListDuplaEncAlunos(*lista, aluno.numMatricula, &achou);
 	if(!achou){ // o aluno não esta na lista
-		PONTD novo = iniListaDuplaEncAluno();
-		strcpy(novo->numMatricula, aluno.numMatricula); 
-		strcpy(novo->nome, aluno.nome); 
+        PONTD novo = iniListaDuplaEncAluno();
+		strcpy(novo->numMatricula, aluno.numMatricula);
+		strcpy(novo->nome, aluno.nome);
 		strcpy(novo->email, aluno.email);
-		novo->prox = no; 	
-		no->ant->prox = novo;
+		novo->prox = no;
 		novo->ant = no->ant;
-		no->ant = novo;
+        no = novo;
 		lista->tam++;
 		return TRUE;
 	}
@@ -944,7 +955,7 @@ PONT buscaNaoOrdenada_R(PONT head, char chave[10]){
 		int com = strcmp(lista->numMatricula, chave);
 		if (com == 0)
 			return lista;
-		else 
+		else
 			return(lista->prox, chave);
 	}
 }
@@ -955,7 +966,7 @@ PONT buscaNaoOrdenada_(PONT head, char chave[10], int* achou){
 		int com = strcmp(lista->numMatricula, chave);
 		if (com == 0)
 			return lista;
-		else 
+		else
 			lista = lista->prox;
 	}
 	return lista;

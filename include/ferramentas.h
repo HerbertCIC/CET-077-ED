@@ -15,7 +15,7 @@ typedef struct{
 	int topo; //pilha cheia quando topo = cap
 }tPilhaAlunos; //last in first out - lifo
 // topo = 0
-int iniPilhaAlunos(tPilhaAlunos* pilha, int cap); 
+int iniPilhaAlunos(tPilhaAlunos* pilha, int cap);
 int incPilhaAlunos(tAluno aluno, tPilhaAlunos* pilha);
 int remPilhaAlunos(tAluno* aluno, tPilhaAlunos* pilha);
 
@@ -106,11 +106,14 @@ PONTD getAluno2(int n, tListDuplaEncAlunos lista);
 PONTD buscaOrd_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou);
 PONTD buscaBin_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou);
 int incOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
+//PONTD incOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
 int remOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
 
 PONTD conListSeqDuplaListEnc(tListAlunos* listaS);
 
-void printListaDuplaEncAluno(tListDuplaEncAlunos lista);
+void printListaDuplaEncAluno(PONTD head);
+void printListaDuplaEncAluno2(tListDuplaEncAlunos lista);
+
 PONTD buscaListaDuplaEncOrdAluno(PONT head, char chave[10]);
 
 
@@ -139,6 +142,7 @@ int buscaLisAlunoOrdRec(tAluno lista[], int n, char chave[], int* achou);
 int buscaLisAlunoBin(tAluno lista[], int n, char chave[], int* achou);
 int buscaLisAlunoBinRec(tAluno lista[], int n, char chave[], int* achou);
 int incLisAlunoOrd(tAluno aluno, tAluno lista[], int n);
+
 
 void printLisAluno(tAluno lista[], int n);
 void printItemLisAluno(tAluno lista[], int n);
