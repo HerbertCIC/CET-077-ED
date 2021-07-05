@@ -3,56 +3,61 @@
 #define TRUE 1;
 #define FALSE 0;
 
-typedef struct{
-    char numMatricula[10];  //chave com 9 caracteres
-    char nome[100];         // nome com até 99 caracteres
-    char email[100];        // eMail com até 99 caracteres
+typedef struct
+{
+	char numMatricula[10]; //chave com 9 caracteres
+	char nome[100];		   // nome com até 99 caracteres
+	char email[100];	   // eMail com até 99 caracteres
 } tAluno;
 
-typedef struct{
-	tAluno* pilha;
-	int cap;  //pilha vazia quando topo = 0
-	int topo; //pilha cheia quando topo = cap
-}tPilhaAlunos; //last in first out - lifo
+typedef struct
+{
+	tAluno *pilha;
+	int cap;	//pilha vazia quando topo = 0
+	int topo;	//pilha cheia quando topo = cap
+} tPilhaAlunos; //last in first out - lifo
 // topo = 0
-int iniPilhaAlunos(tPilhaAlunos* pilha, int cap);
-int incPilhaAlunos(tAluno aluno, tPilhaAlunos* pilha);
-int remPilhaAlunos(tAluno* aluno, tPilhaAlunos* pilha);
+int iniPilhaAlunos(tPilhaAlunos *pilha, int cap);
+int incPilhaAlunos(tAluno aluno, tPilhaAlunos *pilha);
+int remPilhaAlunos(tAluno *aluno, tPilhaAlunos *pilha);
 
-typedef struct{
-	tAluno* fila;
+typedef struct
+{
+	tAluno *fila;
 	int cap;
-	int ini; 	//fila vazia quando ini = fim
-	int fim;  //fila cheia quando fim - ini = cap
-}tFilaAlunos; //first in first out - fifo
+	int ini;   //fila vazia quando ini = fim
+	int fim;   //fila cheia quando fim - ini = cap
+} tFilaAlunos; //first in first out - fifo
 // ini = -1   fim = 0
-int iniFilaAlunos(tFilaAlunos* fila, int cap);
-int incFilaAlunos(tAluno aluno, tFilaAlunos* fila);
-int remFilaAlunos(tAluno* aluno, tFilaAlunos* fila);
+int iniFilaAlunos(tFilaAlunos *fila, int cap);
+int incFilaAlunos(tAluno aluno, tFilaAlunos *fila);
+int remFilaAlunos(tAluno *aluno, tFilaAlunos *fila);
 
-typedef struct{
-	tAluno* lista;
+typedef struct
+{
+	tAluno *lista;
 	int cap;
 	int tam;
 } tListAlunos;
 
-void  itoaT( unsigned int value, char * str);
-void geraAlunos(tListAlunos* lista);
+void itoa(unsigned int value, char *str);
+void geraAlunos(tListAlunos *lista);
 
-void iniListAlunos(tListAlunos* list, int cap);
+void iniListAlunos(tListAlunos *list, int cap);
 
-int buscaNaoOrdenada(tListAlunos* list, char chave[10]);
-int incNaoOrdenada(tAluno aluno, tListAlunos* list);
-int remNaoOrdenada(tAluno aluno, tListAlunos* list);
+int buscaNaoOrdenada(tListAlunos *list, char chave[10]);
+int incNaoOrdenada(tAluno aluno, tListAlunos *list);
+int remNaoOrdenada(tAluno aluno, tListAlunos *list);
 
-int buscaOrdenada(tListAlunos* list, char chave[10], int* achou);
-int incOrdenada(tAluno aluno, tListAlunos* list);
-int remOrdenada(tAluno aluno, tListAlunos* list);
+int buscaOrdenada(tListAlunos *list, char chave[10], int *achou);
+int incOrdenada(tAluno aluno, tListAlunos *list);
+int remOrdenada(tAluno aluno, tListAlunos *list);
 
-struct noALuno{
-	char numMatricula[10];  //chave com 9 caracteres
-    char nome[100];         // nome com até 99 caracteres
-    char email[100];        // eMail com até 99 caracteres
+struct noALuno
+{
+	char numMatricula[10]; //chave com 9 caracteres
+	char nome[100];		   // nome com até 99 caracteres
+	char email[100];	   // eMail com até 99 caracteres
 	struct noALuno *prox;
 };
 
@@ -60,32 +65,34 @@ typedef struct noALuno NOALUNO;
 typedef NOALUNO *PONT;
 
 PONT iniListaEncAluno(void);
-PONT conListSeq2ListEnc(tListAlunos* listaS);
+PONT conListSeq2ListEnc(tListAlunos *listaS);
 
 void printListaEncAluno(PONT head);
 PONT buscaListaEncNaoOrdAluno(PONT head, char chave[10]);
 
-typedef struct{
+typedef struct
+{
 	PONT head; //ini
 	PONT tail; //fim
 	int tam;
-}tListEncAlunos;
+} tListEncAlunos;
 
-void ini_tListEncAlunos(tListEncAlunos* lista);
+void ini_tListEncAlunos(tListEncAlunos *lista);
 void printListaEncAluno2(tListEncAlunos lista);
 PONT busca_tListEncAlunos(tListEncAlunos lista, char chave[10]);
-int inc_tListEncAlunos(tAluno aluno, tListEncAlunos* lista);
-int rem_tListEncAlunos(tAluno aluno, tListEncAlunos* lista);
-PONT buscaOrd_tListEncAlunos(tListEncAlunos lista, char chave[10], int* achou);
-int incOrd_tListEncAlunos(tAluno aluno, tListEncAlunos* lista);
-int remOrd_tListEncAlunos(tAluno aluno, tListEncAlunos* lista);
+int inc_tListEncAlunos(tAluno aluno, tListEncAlunos *lista);
+int rem_tListEncAlunos(tAluno aluno, tListEncAlunos *lista);
+PONT buscaOrd_tListEncAlunos(tListEncAlunos lista, char chave[10], int *achou);
+int incOrd_tListEncAlunos(tAluno aluno, tListEncAlunos *lista);
+int remOrd_tListEncAlunos(tAluno aluno, tListEncAlunos *lista);
 PONT getAluno(int n, tListEncAlunos lista);
-PONT buscaBin_tListEncAlunos(tListEncAlunos lista, char chave[10], int* achou);
+PONT buscaBin_tListEncAlunos(tListEncAlunos lista, char chave[10], int *achou);
 
-struct noALuno2{
-	char numMatricula[10];  //chave com 9 caracteres
-    char nome[100];         // nome com até 99 caracteres
-    char email[100];        // eMail com até 99 caracteres
+struct noALuno2
+{
+	char numMatricula[10]; //chave com 9 caracteres
+	char nome[100];		   // nome com até 99 caracteres
+	char email[100];	   // eMail com até 99 caracteres
 	struct noALuno2 *ant;
 	struct noALuno2 *prox;
 };
@@ -93,30 +100,15 @@ struct noALuno2{
 typedef struct noALuno2 NOALUNOD;
 typedef NOALUNOD *PONTD;
 
-typedef struct{
-	PONTD head; //ini
-	PONTD tail; //fim
-	int tam;
-}tListDuplaEncAlunos;
+struct arvAluno
+{
+	tAluno aluno;
+	struct arvAluno *dir;
+	struct arvAluno *esq;
+};
 
-PONTD iniListaDuplaEncAluno(void);
-PONTD conListSeqListDuplaEnc(tListAlunos* listaS);
-void ini_tListDuplaEncAlunos(tListDuplaEncAlunos* lista);
-PONTD getAluno2(int n, tListDuplaEncAlunos lista);
-PONTD buscaOrd_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou);
-PONTD buscaBin_tListDuplaEncAlunos(tListDuplaEncAlunos lista, char chave[10], int* achou);
-int incOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
-//PONTD incOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
-int remOrd_tListDuplaEncAlunos(tAluno aluno, tListDuplaEncAlunos* lista);
-
-PONTD conListSeqDuplaListEnc(tListAlunos* listaS);
-
-void printListaDuplaEncAluno(PONTD head);
-void printListaDuplaEncAluno2(tListDuplaEncAlunos lista);
-
-PONTD buscaListaDuplaEncOrdAluno(PONT head, char chave[10]);
-
-
+typedef struct arvAluno NOARV;
+typedef NOARV *PONTARV;
 
 /*
 PONT conListSeq2ListEnc_R(tListAlunos* listaS);
@@ -136,13 +128,12 @@ int buscaLisAlunoRec(tAluno lista[], int n, char chave[]);
 int buscaLisAlunoRec2(tAluno lista[], int n, char chave[]);
 
 void incLisAluno(tAluno aluno, tAluno lista[], int n);
-int buscaLisAlunoOrd(tAluno lista[], int n, char chave[], int* achou);
-int buscaLisAlunoOrdRec(tAluno lista[], int n, char chave[], int* achou);
+int buscaLisAlunoOrd(tAluno lista[], int n, char chave[], int *achou);
+int buscaLisAlunoOrdRec(tAluno lista[], int n, char chave[], int *achou);
 
-int buscaLisAlunoBin(tAluno lista[], int n, char chave[], int* achou);
-int buscaLisAlunoBinRec(tAluno lista[], int n, char chave[], int* achou);
+int buscaLisAlunoBin(tAluno lista[], int n, char chave[], int *achou);
+int buscaLisAlunoBinRec(tAluno lista[], int n, char chave[], int *achou);
 int incLisAlunoOrd(tAluno aluno, tAluno lista[], int n);
-
 
 void printLisAluno(tAluno lista[], int n);
 void printItemLisAluno(tAluno lista[], int n);
