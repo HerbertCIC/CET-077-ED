@@ -507,6 +507,7 @@ int iniPilhaAlunos(tPilhaAlunos* pilha, int cap){
 	pilha->pilha = (tAluno*) malloc(sizeof(tAluno)*cap);
 	return 0;
 }
+
 int incPilhaAlunos(tAluno aluno, tPilhaAlunos* pilha){
 	if(pilha->topo < pilha->cap)
 	{

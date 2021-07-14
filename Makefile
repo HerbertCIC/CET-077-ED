@@ -4,10 +4,10 @@ CFLAGS = -O2 -lm -fopenmp
 all: 	./bin/exemplo_00 ./bin/exemplo_01 ./bin/exemplo_02 ./bin/exemplo_03 \
 		./bin/exemplo_04 ./bin/exemplo_05 ./bin/exemplo_06 ./bin/exemplo_07 \
 		./bin/exemplo_08 ./bin/exemplo_09 ./bin/exemplo_10 ./bin/exemplo_11 \
-		./bin/exemplo_12 ./bin/exemplo_13 ./bin/exemplo_15
+		./bin/exemplo_12 ./bin/exemplo_13 ./bin/exemplo_15 ./bin/exemplo_16
 
 run: all
-	./bin/exemplo_15
+	./bin/exemplo_16
 
 ./bin/exemplo_00: main_00.c ./bin/ferramentas.o
 	$(CC) $(CFLAGS) -I ./include -c main_00.c -o ./bin/main_00.o
@@ -68,6 +68,10 @@ run: all
 ./bin/exemplo_15: main_15.c ./bin/ferramentas.o
 	$(CC) $(CFLAGS) -I ./include -c main_15.c -o ./bin/main_15.o
 	$(CC) $(CFLAGS)  ./bin/ferramentas.o ./bin/main_15.o -o ./bin/exemplo_15
+
+./bin/exemplo_16: main_16.c ./bin/ferramentas.o
+	$(CC) $(CFLAGS) -I ./include -c main_16.c -o ./bin/main_16.o
+	$(CC) $(CFLAGS)  ./bin/ferramentas.o ./bin/main_16.o -o ./bin/exemplo_16
 
 ./bin/ferramentas.o: ferramentas.c
 	$(CC) $(CFLAGS) -I ./include -c ferramentas.c -o ./bin/ferramentas.o 

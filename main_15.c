@@ -1,7 +1,27 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/ferramentas.h"
+#include <string.h>
+//#include "include/ferramentas.h"
+
+
+typedef struct
+{
+	char numMatricula[10]; //chave com 9 caracteres
+	char nome[100];		   // nome com até 99 caracteres
+	char email[100];	   // eMail com até 99 caracteres
+} tAluno;
+
+struct arvAluno
+{
+	tAluno aluno;
+	struct arvAluno *dir;
+	struct arvAluno *esq;
+};
+
+typedef struct arvAluno NOARV;
+typedef NOARV *PONTARV;
+
 
 PONTARV novoNoDaArv(tAluno aluno);
 PONTARV incNoNaArv(PONTARV raiz, PONTARV no);
