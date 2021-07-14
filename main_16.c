@@ -20,8 +20,10 @@ int remPilhaNoArv(PONTARV no, tPilhaNoArv *pilha);
 PONTARV buscaNaArv(PONTARV raiz, char chave[])
 {
   PONTARV aux = raiz;
-    while (aux != NULL)
+  if(chave != NULL){
+     while (aux != NULL)
     {
+
         int comp = strcmp(aux->aluno.numMatricula, chave);
         if (comp == 0)
             return aux;
@@ -33,7 +35,8 @@ PONTARV buscaNaArv(PONTARV raiz, char chave[])
                 aux = aux->dir;
         }
     }
-    return NULL; //Não achou retorna NULL
+  }   
+  return NULL; //Não achou retorna NULL ou chave é null
 }
 
 PONTARV novoNoDaArv(tAluno aluno)
@@ -128,7 +131,7 @@ PONTARV treeMin(PONTARV raiz)
 
 
 PONTARV removeNoAtual(PONTARV atual){
-  PONTARV no1,no2;
+  PONTARV no1, no2;
   /*Este caso serve tanto para um nós com apenas 1 ramo ou folhas*/
   if(atual->esq == NULL){//sem ramo a esquerda
     no2 = atual->dir;//aponta para a subarvore da direita
@@ -142,6 +145,8 @@ PONTARV removeNoAtual(PONTARV atual){
     no1 = no2;
     no2 = no2->dir;
   }
+  printf("\n\n%s", no1->aluno.numMatricula);
+  printf("\n\n%s", no2->aluno.numMatricula);
 
   //copia o ramo mais a direita na sub-arvore esquerda para o lugar do no removido
   if(no1 != atual){
@@ -149,12 +154,13 @@ PONTARV removeNoAtual(PONTARV atual){
     no2->esq = atual->esq;
   }
   no2->dir= atual->dir;
+
   free(atual);
   return no2;
 }
 
 PONTARV removeNoDaArv(PONTARV raiz, PONTARV no){
-  PONTARV aux = raiz;
+  //PONTARV aux = raiz;
   if(raiz==NULL)
     return NULL;  
   else{
@@ -165,14 +171,14 @@ PONTARV removeNoDaArv(PONTARV raiz, PONTARV no){
        //achou o nó a ser removido
        if(comp==0){
          if(atual == raiz)
-            raiz = removeNoAtual(atual);
+           raiz = removeNoAtual(atual);            
           else{//retorna o novo nó onde o ant vai apontar
             if(ant->dir == atual)
               ant->dir = removeNoAtual(atual);
             else
               ant->esq = removeNoAtual(atual);
           }
-          return aux;
+          return raiz;
        }
        //percorrendo a arvore procurando o nó que será removido
        ant = atual;
@@ -305,6 +311,7 @@ int main(){
     // char matricula[] = "202010281";
     // char matricula[] = "202410281";
  
+    printf("\nTESTANDO BUSCA NA ARVORE\n");
     printf("\n\nProcurando um aluno com numero de matricula: %s na arvore: ", matricula);
     PONTARV busca = buscaNaArv(raiz, matricula);
 
@@ -315,29 +322,17 @@ int main(){
 
     printf("\nResultado da busca: %s", busca2->aluno.numMatricula);
 
-    removeNoDaArv(raiz, novo);
 
-    printf("\n\nProcurando nó removido da arvore:");
-    PONTARV busca3 = buscaNaArv(raiz, novo->aluno.numMatricula);
 
-    printf("\nResultado da busca: %s", busca3->aluno.numMatricula);
-    
-    printf("\n%s\n", raiz->aluno.numMatricula);
-    printf("\n%s\n", raiz->esq->aluno.numMatricula);
-    printf("\n%s\n", raiz->esq->esq->aluno.numMatricula);
-    printf("\n%s\n", raiz->esq->dir->aluno.numMatricula);
-    printf("\n%s\n", raiz->dir->aluno.numMatricula);
-    printf("\n%s\n", raiz->dir->esq->aluno.numMatricula);
-    printf("\n%s\n", raiz->dir->dir->aluno.numMatricula);
 
-    
-    removeNoDaArv(raiz, raiz->dir);
+    printf("\n\nTESTANDO REMOÇÃO NA ARVORE\n");
 
-    printf("\n\nProcurando nó removido da arvore:");
-    PONTARV busca4 = buscaNaArv(raiz, raiz->dir->aluno.numMatricula);
+    raiz = removeNoDaArv(raiz, raiz->dir->dir);
+    PONTARV busca3 = buscaNaArv(raiz, raiz->dir->dir->aluno.numMatricula);
 
-    printf("\nResultado da busca: %s", busca4->aluno.numMatricula);
+    printf("\n\nNovo valor do nó: %s", busca3->aluno.numMatricula);
 
+    printf("\nArvore - pre-ordem:");
     printf("\n%s\n", raiz->aluno.numMatricula);
     printf("\n%s\n", raiz->esq->aluno.numMatricula);
     printf("\n%s\n", raiz->esq->esq->aluno.numMatricula);
@@ -347,13 +342,28 @@ int main(){
     printf("\n%s\n", raiz->dir->dir->aluno.numMatricula);
 
 
-    removeNoDaArv(raiz, raiz->esq);
+    //aqui entra no removeatual depois do if
+    raiz = removeNoDaArv(raiz, raiz->esq);   
+    PONTARV busca4 = buscaNaArv(raiz, raiz->esq->aluno.numMatricula);
 
-    printf("\n\nProcurando nó removido da arvore:");
-    PONTARV busca5 = buscaNaArv(raiz, raiz->esq->aluno.numMatricula);
+    printf("\n\nNovo valor do nó: %s", busca4->aluno.numMatricula);
 
-    printf("\nResultado da busca: %s", busca5->aluno.numMatricula);
+    printf("\nArvore - pre-ordem:");
+    printf("\n%s\n", raiz->aluno.numMatricula);
+    printf("\n%s\n", raiz->esq->aluno.numMatricula);
+    printf("\n%s\n", raiz->esq->esq->aluno.numMatricula);
+    printf("\n%s\n", raiz->esq->dir->aluno.numMatricula);
+    printf("\n%s\n", raiz->dir->aluno.numMatricula);
+    printf("\n%s\n", raiz->dir->esq->aluno.numMatricula);
+    printf("\n%s\n", raiz->dir->dir->aluno.numMatricula);
 
+
+    raiz = removeNoDaArv(raiz, raiz);   
+    PONTARV busca5 = buscaNaArv(raiz, raiz->aluno.numMatricula);
+
+    printf("\n\nNovo valor do nó: %s", busca5->aluno.numMatricula);
+    
+    printf("\nArvore - pre-ordem:");
     printf("\n%s\n", raiz->aluno.numMatricula);
     printf("\n%s\n", raiz->esq->aluno.numMatricula);
     printf("\n%s\n", raiz->esq->esq->aluno.numMatricula);
