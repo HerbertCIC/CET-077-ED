@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "arvCabecalhos.h"
+#include "include/arvCabecalhos.h"
 
 PONTARV buscaNaArv(PONTARV raiz, char chave[])
 {
-    while (raiz != NULL)
+  PONTARV aux = raiz;
+    while (aux != NULL)
     {
-        int comp = strcmp(raiz->aluno.numMatricula, chave);
+        int comp = strcmp(aux->aluno.numMatricula, chave);
         if (comp == 0)
-            return raiz;
+            return aux;
         else
         {
             if (comp > 0)
-                raiz = raiz->esq;
+                aux = aux->esq;
             else
-                raiz = raiz->dir;
+                aux = aux->dir;
         }
     }
     return NULL; //Não achou retorna NULL
@@ -31,7 +32,7 @@ PONTARV novoNoDaArv(tAluno aluno)
     return novo;
 }
 
-PONTARV incNoNaArv(PONTARV raiz, PONTARV no)
+/*PONTARV incNoNaArv(PONTARV raiz, PONTARV no)
 {
     if (raiz == NULL)
         return no;
@@ -49,6 +50,43 @@ PONTARV incNoNaArv(PONTARV raiz, PONTARV no)
         aux = no;  //atribui o nó a posição encontrada
         return raiz; //retorna nó original
     }
+}*/
+
+PONTARV incNoNaArv(PONTARV raiz, PONTARV no)
+{
+  PONTARV aux = raiz;
+    if (raiz == NULL){
+      //printf("\nEntrei");
+         return no;
+    }       
+    else
+    {
+      //printf("\nEntrei 2");
+      PONTARV atual = raiz;
+      PONTARV ant = NULL;
+        while (atual != NULL)
+        { //busca a posicão que deve-se inserir
+            //printf("\natual != null");
+            ant = atual;
+            int comp = strcmp(atual->aluno.numMatricula, no->aluno.numMatricula);
+            if (comp < 0){
+                //printf("\nentrei no ramo da direita");
+                atual = atual->dir;         
+            }
+            else if(comp > 0){
+              //printf("\nentrei no ramo da esquerda"); 
+              atual = atual->esq;
+            }
+            else
+              return 0;                
+        }
+        int comp = strcmp(ant->aluno.numMatricula, no->aluno.numMatricula);
+        if(comp < 0)
+          ant->dir = no;
+        else
+          ant->esq = no;
+    }
+    return aux;
 }
 
 //printa a arvore em ordem
@@ -93,6 +131,7 @@ PONTARV treeMin(PONTARV raiz)
     return NULL;
 }
 
+/*
 PONTARV remNoNaArv(PONTARV raiz, PONTARV no)
 {
     int comp = strcmp(raiz->aluno.numMatricula, no->aluno.numMatricula);
@@ -199,6 +238,64 @@ PONTARV remNoNaArv(PONTARV raiz, PONTARV no)
         }
       return raiz;
     }
+}*/
+
+PONTARV removeNoAtual(PONTARV atual){
+  PONTARV no1,no2;
+  /*Este caso serve tanto para um nós com apenas 1 ramo ou folhas*/
+  if(atual->esq == NULL){//sem ramo a esquerda
+    no2 = atual->dir;//aponta para a subarvore da direita
+    free(atual);//libera no atual
+    return no2;//retorna no da direita
+  }
+  //procura o no mais a direita na subarvore esquerda 
+  no1 = atual;
+  no2 = atual->esq;
+  while(no2->dir != NULL){
+    no1 = no2;
+    no2 = no2->dir;
+  }
+
+  //copia o ramo mais a direita na sub-arvore esquerda para o lugar do no removido
+  if(no1 != atual){
+    no1->dir = no2->esq;
+    no2->esq = atual->esq;
+  }
+  no2->dir= atual->dir;
+  free(atual);
+  return no2;
+}
+
+PONTARV removeNoDaArv(PONTARV raiz, PONTARV no){
+  PONTARV aux = raiz;
+  if(raiz==NULL)
+    return NULL;  
+  else{
+    PONTARV atual = raiz;
+    PONTARV ant = NULL;    
+    while(atual != NULL){
+       int comp = strcmp(atual->aluno.numMatricula, no->aluno.numMatricula);
+       //achou o nó a ser removido
+       if(comp==0){
+         if(atual == raiz)
+            raiz = removeNoAtual(atual);
+          else{//retorna o novo nó onde o ant vai apontar
+            if(ant->dir == atual)
+              ant->dir = removeNoAtual(atual);
+            else
+              ant->esq = removeNoAtual(atual);
+          }
+          return aux;
+       }
+       //percorrendo a arvore procurando o nó que será removido
+       ant = atual;
+       comp = strcmp(atual->aluno.numMatricula, no->aluno.numMatricula);
+       if(comp < 0)
+        atual = atual->dir;
+       else
+        atual = atual->esq;
+    }
+  }
 }
 
 int iniPilhaNoArv(tPilhaNoArv *pilha, int cap)
